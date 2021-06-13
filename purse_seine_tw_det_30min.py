@@ -59,12 +59,12 @@ def pursine(df=df,GPStime_column_name=GPStime_column_name, vessel_column_name=ve
             print()
             print(q)
             for x in range(0,1):
-                for r in range(1,99):
+                for r in range(1,48):
                     if df3[GPStime_column_name][0]+timedelta(minutes=30) < datetime.strptime("2021-05-04", "%Y-%m-%d") :
                         if df3[GPStime_column_name][x]+timedelta(minutes=30)*r < datetime.strptime("2021-05-04", "%Y-%m-%d") : 
                             print(df3[GPStime_column_name][x]+timedelta(minutes=30)*r)             
                             new_column_lst = []
-                            new_column_lst.append({vessel_column_name:df3[vessel_column_name][0],GPStime_column_name:df3[GPStime_column_name][x]+timedelta(minutes=30)})
+                            new_column_lst.append({vessel_column_name:df2[vessel_column_name][0],GPStime_column_name:df2[GPStime_column_name][x]+timedelta(minutes=30)})
                             df3 = df3.append(new_column_lst)
                             df3 = df3.sort_values(GPStime_column_name,ignore_index=True,ascending=False) 
         except KeyError as e:
