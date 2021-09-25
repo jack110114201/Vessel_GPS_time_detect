@@ -9,7 +9,7 @@ vessel_list = list(("裕穩101","裕穩301","百富103","百富301","大慶666",
 
 GPStime_column_name ='GPS時間'
 vessel_column_name = '中文船名'
-df = pd.read_csv('C:/Users/Tibame_25/Desktop/vessel.csv',encoding = 'big5',engine='python')
+df = pd.read_csv('D:/Vessel_GPS_time_detect-main/vessel.csv',encoding = 'big5',engine='python')
 
 
 def pursine(df=df,GPStime_column_name=GPStime_column_name, vessel_column_name=vessel_column_name, vessel_list=vessel_list):
@@ -29,14 +29,14 @@ def pursine(df=df,GPStime_column_name=GPStime_column_name, vessel_column_name=ve
                             for r in range(3,9999):
                                 if df[GPStime_column_name][e]+timedelta(minutes=30)*r < df[GPStime_column_name][e+1] :
                                     print(df[GPStime_column_name][e]+timedelta(minutes=30)*r)
-                                    new_column_lst = [] 
-                                    new_column_lst.append({vessel_column_name:df[vessel_column_name][0],GPStime_column_name:df[GPStime_column_name][e]+timedelta(minutes=30)})
-                                    new_column_lst.append({vessel_column_name:df[vessel_column_name][0],GPStime_column_name:df[GPStime_column_name][e]+timedelta(minutes=30)*2})
-                                    new_column_lst.append({vessel_column_name:df[vessel_column_name][0],GPStime_column_name:df[GPStime_column_name][e]+timedelta(minutes=30)*r})
-                                    df = df.append(new_column_lst)
-                                    df = df.sort_values(GPStime_column_name,ignore_index=True) #新增資料後，排序，並修改原本的df
+                                    #new_column_lst = []
+                                    #new_column_lst.append({vessel_column_name:df[vessel_column_name][0],GPStime_column_name:df[GPStime_column_name][e]+timedelta(minutes=30)})
+                                    #new_column_lst.append({vessel_column_name:df[vessel_column_name][0],GPStime_column_name:df[GPStime_column_name][e]+timedelta(minutes=30)*2})
+                                    #new_column_lst.append({vessel_column_name:df[vessel_column_name][0],GPStime_column_name:df[GPStime_column_name][e]+timedelta(minutes=30)*r})
+                                    #df = df.append(new_column_lst)
+                                    #df = df.sort_values(GPStime_column_name,ignore_index=True) #新增資料後，排序，並修改原本的df
                                 else:
-                                    break      
+                                    continue
                     else:
                         continue
                 except (ValueError,KeyError):
@@ -59,14 +59,14 @@ def pursine(df=df,GPStime_column_name=GPStime_column_name, vessel_column_name=ve
             print()
             print(q)
             for x in range(0,1):
-                for r in range(1,48):
-                    if df3[GPStime_column_name][0]+timedelta(minutes=30) < datetime.strptime("2021-05-04", "%Y-%m-%d") :
-                        if df3[GPStime_column_name][x]+timedelta(minutes=30)*r < datetime.strptime("2021-05-04", "%Y-%m-%d") : 
-                            print(df3[GPStime_column_name][x]+timedelta(minutes=30)*r)             
+                for r in range(2,9999):
+                    if df3[GPStime_column_name][0]+timedelta(minutes=30) < datetime.strptime("2021-09-24", "%Y-%m-%d") :
+                        if df3[GPStime_column_name][x]+timedelta(minutes=30)*r < datetime.strptime("2021-09-24", "%Y-%m-%d") :
+                            print(df3[GPStime_column_name][x]+timedelta(minutes=30)*r)
                             new_column_lst = []
                             new_column_lst.append({vessel_column_name:df2[vessel_column_name][0],GPStime_column_name:df2[GPStime_column_name][x]+timedelta(minutes=30)})
                             df3 = df3.append(new_column_lst)
-                            df3 = df3.sort_values(GPStime_column_name,ignore_index=True,ascending=False) 
+                            df3 = df3.sort_values(GPStime_column_name,ignore_index=True,ascending=False)
         except KeyError as e:
             print()
             print(q)
