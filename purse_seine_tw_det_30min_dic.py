@@ -12,19 +12,20 @@ def pursine(df, GPStime_column_name, vessel_column_name, vessel_list, check_time
     df_group = df.groupby(vessel_column_name)
     for i in vessel_list:
         try:
-            df = df_group.get_group(i)
+            df = df_group.get_group(i).reset_index()
             print()
             print(i)
+
             for e in range(0,9999):  # 有成功
                 try:
                     if df[GPStime_column_name][e]+timedelta(minutes=30) < df[GPStime_column_name][e+1] :
                         if df[GPStime_column_name][e]+timedelta(minutes=30)*2 < df[GPStime_column_name][e+1] :
-                            # print(df[GPStime_column_name][e]+timedelta(minutes=30),df[GPStime_column_name][e]+timedelta(minutes=30)*2)
+                            #print(df[GPStime_column_name][e]+timedelta(minutes=30),df[GPStime_column_name][e]+timedelta(minutes=30)*2)
                             empty_dict[i].append(str(df[GPStime_column_name][e] + timedelta(minutes=30)))
                             empty_dict[i].append(str(df[GPStime_column_name][e] + timedelta(minutes=30)* 2))
                             for r in range(3,9999):
                                 if df[GPStime_column_name][e]+timedelta(minutes=30)*r < df[GPStime_column_name][e+1] :
-                                    # print(df[GPStime_column_name][e]+timedelta(minutes=30)*r)
+                                    #print(df[GPStime_column_name][e]+timedelta(minutes=30)*r)
                                     empty_dict[i].append(str(df[GPStime_column_name][e] + timedelta(minutes=30) * r))
                                 else:
                                     continue
@@ -43,7 +44,7 @@ def pursine(df, GPStime_column_name, vessel_column_name, vessel_list, check_time
 
     df2[GPStime_column_name] = pd.to_datetime(df2[GPStime_column_name], format='%Y/%m/%d %H:%M:%S')
 
-    df2_group = df2.groupby(vessel_column_name)
+    df2_group = df2.groupby(vessel_column_name).reset_index()
 
     for q in vessel_list:
         try:
